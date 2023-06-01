@@ -1,0 +1,21 @@
+.square {
+    width: 980px;
+    height: auto;
+    display: flex;
+}
+
+.childDiv {
+    padding: 2px;
+    margin: 0.3px;
+    border: solid;
+}
+
+.childDiv:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.gridButton {
+    width: 100px;
+    height: 50px;
+    margin: 20px;
+}

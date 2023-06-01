@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etch-A-Sketch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="gridButton">Change Grid</button>
+    <div class="square"></div>
+
+    <script>
+        let i=0;
+        let j=0;
+        let maxLength = 16;
+
+        let div = document.querySelector(".square");
+        
+        document.addEventListener("mouseover", (e) => {
+            console.log(e.target);
+            if(e.target.classList[0] == "childDiv") {
+                e.target.style.background = "rgba(0, 0, 0, 1)";
+                // e.target.style.background.alpha
+                // console.log(e.target);
+            }
+        });
+
+        btn = document.querySelector(".gridButton");
+        btn.addEventListener("click", () => {
+            newLength = prompt("Enter a grid size (n x n):");
+            if (!Number.isNaN(newLength) && 0 < newLength && newLength <= 100){
+                while (div.firstChild) {
+                    div.removeChild(div.firstChild);
+                }
+                maxLength = newLength;
+                drawGrid();
+            } else {
+                console.log(newLength);
+                console.log(typeof newLength);
+                alert("Enter a valid number!");
+            }
+        });
+
+        function drawGrid() {
+            for(i=0; i<maxLength; i++) {
+                let innerDiv = document.createElement("div");
+                innerDiv.classList.add("innerDiv");
+                
+                for(j=0; j<maxLength; j++) {
+                    let child = document.createElement("div");
+                    child.classList.add("childDiv");
+                    innerDiv.appendChild(child);
+                }
+
+                div.appendChild(innerDiv);
+            }
+        }
+        console.log("16x16 grid created.");
+    </script>
+</body>
+</html>
