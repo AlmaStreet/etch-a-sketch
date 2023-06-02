@@ -8,12 +8,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button class="gridButton">Change Grid</button>
-    <button class="clearButton">Clear Grid</button>
-    <button class="pen">Pen</button>
-    <button class="eraser">Eraser</button>
-    <button class="border">Border</button> 
-
+    <div class="buttonDiv">
+        <button class="gridButton">Change Grid</button>
+        <button class="clearButton">Clear Grid</button>
+        <button class="pen">Pen</button>
+        <button class="eraser">Eraser</button>
+        <!-- <button class="border">Border</button>  -->
+    </div>
     <div class="square"></div>
 
     <script>
@@ -54,16 +55,18 @@
         });
 
         //Border
-        btnBorder = document.querySelector(".border");
-        btnBorder.addEventListener("click", () => {
-            if (borderToggle) { 
-                div.style.border = "2px solid black";
-                borderToggle = false;
-            } else {
-                div.style.border = "1px solid gray";
-                borderToggle = true;
-            }
-        });
+        // btnBorder = document.querySelector(".border");
+        // btnBorder.addEventListener("click", () => {
+        //     if (borderToggle) { 
+        //         border: 0.1px solid gray;
+        //         div.style.border = "2px solid black";
+        //         borderToggle = false;
+        //     } else {
+        //         border: 0.1px solid gray;
+        //         div.style.border = "1px solid gray";
+        //         borderToggle = true;
+        //     }
+        // });
 
         //Clear grid
         document.querySelector(".clearButton").addEventListener("click", () => {
@@ -77,7 +80,7 @@
 
         // Button to Draw grid
         document.querySelector(".gridButton").addEventListener("click", () => {
-            newLength = prompt("Enter a grid size (n x n):");
+            newLength = prompt("Enter a grid size between 1 to 100 (n x n):");
             if (!Number.isNaN(newLength) && 0 < newLength && newLength <= 100){
                 while (div.firstChild) {
                     div.removeChild(div.firstChild);
