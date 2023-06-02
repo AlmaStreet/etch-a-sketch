@@ -9,33 +9,80 @@
 </head>
 <body>
     <button class="gridButton">Change Grid</button>
+    <button class="clearButton">Clear Grid</button>
+    <button class="pen">Pen</button>
+    <button class="eraser">Eraser</button>
+    <button class="border">Border</button> 
+
     <div class="square"></div>
 
     <script>
         let i=0;
         let j=0;
-        let maxLength = 16;
-
+        let LENGTH = 512;
         let div = document.querySelector(".square");
+        let size = 16;
+        let currentColor = "rgba(0, 0, 0, 1)";
+        let PENCOLOR = "rgba(0, 0, 0, 1)";
+        let BLANKCOLOR = "rgba(0, 0, 0, 0)";
+        let borderToggle = false;
         
+        //Mouse over
         document.addEventListener("mouseover", (e) => {
             console.log(e.target);
             if(e.target.classList[0] == "childDiv") {
-                e.target.style.background = "rgba(0, 0, 0, 1)";
-                // e.target.style.background.alpha
-                // console.log(e.target);
+                e.target.style.background = currentColor;
             }
         });
 
-        btn = document.querySelector(".gridButton");
-        btn.addEventListener("click", () => {
+        //Pen
+        btnPen = document.querySelector(".pen");
+        btnPen.style.background = "gray";
+        btnPen.addEventListener("click", () => {
+            currentColor = PENCOLOR;
+            btnEraser.style.background = "";
+            btnPen.style.background = "gray";
+        });
+
+        //Eraser
+        btnEraser = document.querySelector(".eraser");
+        btnEraser.addEventListener("click", () => {
+            currentColor = BLANKCOLOR;
+            btnPen.style.background = "";
+            btnEraser.style.background = "gray";
+
+        });
+
+        //Border
+        btnBorder = document.querySelector(".border");
+        btnBorder.addEventListener("click", () => {
+            if (borderToggle) { 
+                div.style.border = "2px solid black";
+                borderToggle = false;
+            } else {
+                div.style.border = "1px solid gray";
+                borderToggle = true;
+            }
+        });
+
+        //Clear grid
+        document.querySelector(".clearButton").addEventListener("click", () => {
+            parent = document.querySelector(".square");
+            for (const child of parent.children) {
+                for (const c of child.children) {
+                    c.style.background = BLANKCOLOR;
+                }
+            }
+        });
+
+        // Button to Draw grid
+        document.querySelector(".gridButton").addEventListener("click", () => {
             newLength = prompt("Enter a grid size (n x n):");
             if (!Number.isNaN(newLength) && 0 < newLength && newLength <= 100){
                 while (div.firstChild) {
                     div.removeChild(div.firstChild);
                 }
-                maxLength = newLength;
-                drawGrid();
+                drawGrid(newLength);
             } else {
                 console.log(newLength);
                 console.log(typeof newLength);
@@ -43,20 +90,24 @@
             }
         });
 
-        function drawGrid() {
-            for(i=0; i<maxLength; i++) {
+        function drawGrid(size) {
+            let wh = LENGTH/size;
+            for(i=0; i<size; i++) {
                 let innerDiv = document.createElement("div");
                 innerDiv.classList.add("innerDiv");
-                
-                for(j=0; j<maxLength; j++) {
+                for(j=0; j<size; j++) {
                     let child = document.createElement("div");
                     child.classList.add("childDiv");
+                    child.style.width = `${wh}px`;
+                    child.style.height = `${wh}px`;
+                    child.style.display = "inline-block";
+                    child.style.boxSizing = 'border-box';
                     innerDiv.appendChild(child);
                 }
-
                 div.appendChild(innerDiv);
             }
         }
+        div.style.border = "2px solid black";
         console.log("16x16 grid created.");
     </script>
 </body>

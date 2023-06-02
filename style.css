@@ -1,21 +1,30 @@
 .square {
-    width: 980px;
-    height: auto;
+    width: 512px;
+    height: 512px;
+    /* border: 1px solid black; */
+    margin: auto;
     display: flex;
+    justify-content: flex-start;
+}
+
+.innerDiv {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
 .childDiv {
-    padding: 2px;
-    margin: 0.3px;
-    border: solid;
+    /* padding: 0px; */
+    /* margin: 0px; */
+    border: 0.1px solid gray;
 }
 
 .childDiv:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.gridButton {
+button {
     width: 100px;
     height: 50px;
-    margin: 20px;
+    margin: 10px;
 }
